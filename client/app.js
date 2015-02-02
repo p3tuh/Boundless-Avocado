@@ -9,65 +9,56 @@ angular.module('boundless', [
 .config(function ($stateProvider, $urlRouterProvider, $httpProvider) {
 		
 		//reroutes to '/' as default
-	$urlRouterProvider.otherwise('/');
+	$urlRouterProvider.otherwise('/home');
 
 	$stateProvider
 			//if at /groups, render groups.html & use GroupsController for the view's controller
 
-		.state('groups', {
+		.state('/home', {
+			templateUrl: 'app/auth/home.html',
+			controller: 'BoundlessController',
+			url: '/home'
+		})
+
+		.state('home.groups', {
 			templateUrl: 'app/groups/groups.html',
 			controller: 'GroupsController',
 			url: '/groups'
 		})
 
-		.state('signin', {
+		.state('home.signin', {
 			templateUrl: 'app/auth/signin.html',
 			controller: 'AuthController',
 			url: '/signin'
 		})
 
-		.state('signup', {
+		.state('home.signup', {
 			templateUrl: 'app/auth/signup.html',
 			controller: 'AuthController',
 			url: '/signup'
 		})
 
-		.state('confirmation', {
-			templateUrl: 'app/auth/confirmation.html',
-			controller: 'AuthController',
-			url: '/confirmation'
-		})
 
-		.state('newgroup', {
+		.state('home.newgroup', {
 			templateUrl: 'app/groups/newgroup.html',
 			controller: 'GroupsController',
 			url: '/newgroup'
 		})
 
 
-		.state('usergroups', {
+		.state('home.usergroups', {
 			templateUrl: 'app/groups/usergroups.html',
 			controller: 'GroupsController',
 			url: '/usergroups' 
 		})
 
-		.state('/', {
-			templateUrl: 'app/auth/parent.html',
-			controller: 'BoundlessController',
-			url: '/'
-		})
 
-		.state('/signout', {
+		.state('home.signout', {
 			templateUlr: 'app/auth/signout.html',
 			controller: 'AuthController',
 			url: '/signout'
-		})
+		});
 
-		.state('/navbar', {
-			templateUrl: 'app/auth/parent.html',
-			controller: 'BoundlessController',
-			url: '/'
-		});	
 		// We add our $httpInterceptor into the array
 		// of interceptors. Think of it like middleware for your ajax calls
 	$httpProvider.interceptors.push('AttachTokens');
